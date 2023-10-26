@@ -28,7 +28,7 @@ function addCityToDOM(id, city, description, image) {
   links.classList.add("col-sm-6");
   links.classList.add("col-lg-3");
   links.classList.add("mb-4");
-  // links.href = `pages/adventures/?city=${id}`;
+  links.href = `pages/adventures/?city=${id}`;
   links.innerHTML = `
   <a href="pages/adventures/?city=${id}" id="${id}">
         <div class="tile text-white">
