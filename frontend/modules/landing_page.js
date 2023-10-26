@@ -5,11 +5,10 @@ async function init() {
   let cities = await fetchCities();
 
   //Updates the DOM with the cities
-  if (cities) {
+ 
     cities.forEach((key) => {
       addCityToDOM(key.id, key.city, key.description, key.image);
     });
-  }
 }
 
 //Implementation of fetch call
@@ -23,6 +22,24 @@ async function fetchCities() {
 function addCityToDOM(id, city, description, image) {
   // TODO: MODULE_CITIES
   // 1. Populate the City details and insert those details into the DOM
+  let target = document.getElementById("data");
+  let links = document.createElement("a");
+  links.setAttribute(`id`, `${id}`);
+  links.classList.add("col-sm-6");
+  links.classList.add("col-lg-3");
+  links.classList.add("mb-4");
+  // links.href = `pages/adventures/?city=${id}`;
+  links.innerHTML = `
+  <a href="pages/adventures/?city=${id}" id="${id}">
+        <div class="tile text-white">
+            <img class="img-fluid imgSize" src="${image}">
+            <div class="tile-text text-center pb-3">
+                <h5>${city}</h5>
+                <div>${description}</div>
+            </div>
+        </div>
+    </a>`;
+  target.appendChild(links);
 
 }
 
