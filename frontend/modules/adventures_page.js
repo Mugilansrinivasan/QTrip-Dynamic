@@ -5,6 +5,10 @@ import config from "../conf/index.js";
 function getCityFromURL(search) {
   // TODO: MODULE_ADVENTURES
   // 1. Extract the city id from the URL's Query Param and return it
+  let strArray = search.split("=");
+  //console.log('search',strArray[1]);
+  fetchAdventures(strArray[1]);
+  return strArray[1];
 
 }
 
@@ -12,6 +16,17 @@ function getCityFromURL(search) {
 async function fetchAdventures(city) {
   // TODO: MODULE_ADVENTURES
   // 1. Fetch adventures using the Backend API and return the data
+  try {
+    const result = await fetch(
+      `${config.backendEndpoint}/adventures/?city=${city}`
+    );
+    const data = await result.json();
+    console.log("data", data);
+    
+    return data;
+  } catch (err) {
+    return null;
+  }
 
 }
 
@@ -19,6 +34,33 @@ async function fetchAdventures(city) {
 function addAdventureToDOM(adventures) {
   // TODO: MODULE_ADVENTURES
   // 1. Populate the Adventure Cards and insert those details into the DOM
+  const parent = document.getElementById("data");
+  // parent.innerHTML=' ';
+  adventures.forEach((item) => {
+    parent.innerHTML += `
+    <div class="col-6 col-md-3 my-3" style="position: relative">
+    <a id=${item.id} href="detail/?adventure=${item.id}">
+    <div class="category-banner">${item.category}</div>
+    <div class="activity-card">
+      <img
+        src=${item.image}
+        alt=${item.name}
+      />
+      <div class="adventure-detail-card">
+        <div class="adventure-card-text d-flex">
+          <h5 class="mb-0 headingText">${item.name}</h5>
+          <span>₹${item.costPerHead}</span>
+        </div>
+        <div class="adventure-card-text d-flex">
+          <h5 class="mb-0">Duration</h5>
+          <span>${item.duration} Hours</span>
+        </div>
+      </div>
+    </div>
+    </a>
+  </div>
+  `;
+  });
 
 }
 
