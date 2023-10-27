@@ -146,6 +146,19 @@
             // TODO: MODULE_FILTERS
             // 1. Change the DOM to show the selected duration filter. Use the provided input event
             // 2. Invoke saveFiltersToLocalStorage here
+            document.getElementById("data").textContent = "";
+            
+            // // //it extract the filter value from the event.
+            filters.duration= event.target.value;
+            //it keeps the select tag default value visible on selecting any option.
+            document.getElementById("duration-select").selectedIndex = 0;
+            // //invoking pill function here
+            let filteredAdventures = filterFunction(adventures, filters);
+            generateFilterPillsAndUpdateDOM(filters);
+            addAdventureToDOM(filteredAdventures);  
+            // // 2. Invoke saveFiltersToLocalStorage here
+            saveFiltersToLocalStorage(filters);
+            // 2. Invoke saveFiltersToLocalStorage here
 
         }
 
@@ -153,6 +166,13 @@
         function clearDuration(event) {
             // TODO: MODULE_FILTERS
             // 1. Change the DOM to clear the Duration filter. Refer clearCategory() below
+            // 2. Invoke saveFiltersToLocalStorage here
+            document.getElementById("category-list").textContent = "";
+            filters["category"] = [];
+            let filteredAdventures = filterFunction(adventures, filters);
+            addAdventureToDOM(filteredAdventures);
+            // 2. Invoke saveFiltersToLocalStorage here
+            saveFiltersToLocalStorage(filters)
             // 2. Invoke saveFiltersToLocalStorage here
 
         }
@@ -177,6 +197,7 @@
 
             // TODO: MODULE_FILTERS
             // 1. Invoke saveFiltersToLocalStorage here
+            saveFiltersToLocalStorage(filters);
         }
 
         //executed when clear button is clicked on category filter dropdown
@@ -190,6 +211,7 @@
 
             // TODO: MODULE_FILTERS
             // 1. Invoke saveFiltersToLocalStorage here
+            saveFiltersToLocalStorage(filters);
         }
 
         //helper function

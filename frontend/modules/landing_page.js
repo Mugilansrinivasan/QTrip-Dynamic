@@ -5,10 +5,11 @@ async function init() {
   let cities = await fetchCities();
 
   //Updates the DOM with the cities
- 
+  if (cities) {
     cities.forEach((key) => {
       addCityToDOM(key.id, key.city, key.description, key.image);
     });
+  }
 }
 
 //Implementation of fetch call
